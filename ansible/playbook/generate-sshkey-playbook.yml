@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars:
+    ssh_key_filename: id_rsa  
+  
+  tasks:
+  - name: generate SSH key "{{ssh_key_filename}}".pub
+    openssh_keypair:
+      path: "~/.ssh/{{ssh_key_filename}}"
+      type: rsa
+      size: 4096
+      state: present
+      force: no
